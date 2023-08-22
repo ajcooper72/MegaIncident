@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>global.MegaIncidentUtils</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>MegaIncidentUtils</name>
+        <script><![CDATA[var MegaIncidentUtils = Class.create();
+MegaIncidentUtils.prototype = {
+    initialize: function() {},
+
+    /**
+     * Create a new incident from provided JSON payload
+     * @param {JSON} JSON object containing fields to populate in new incident, additionally
+     *               Base64 encoded attachments can be added to the payload and automatically 
+     *               created
+     * @returns {String} Incident number
+     */
+    createIncidentFromJSON: function(jsonPayload) {
+        var grInc = new GlideRecord('incident');
+        grInc.initialize();
+
+        Object.keys(jsonPayload).forEach(function(_field) {
+            switch (_field) {
+                case 'attachments':
+                    // attachments are processed later
+                    break;
+                case 'caller_id':
+                    // we expect a user name or email for caller_id so attempt to find it in sys_user
+                    grInc.setValue(_field, this._getUser(jsonPayload[_field]));
+                    break;
+                default:
+                    // assume the field exists in the incident and update the value
+                    grInc.setValue(_field, jsonPayload[_field]);
+            }
+        }, this);
+
+        grInc.insert();
+
+        // process attachments
+        var attachments = jsonPayload['attachments'];
+        attachments.forEach(function(_attachmentJSON) {
+            this.createAttachmentFromBase64(grInc, _attachmentJSON['fileName'], 
+											_attachmentJSON['contentType'], _attachmentJSON['base64Data']);
+        }, this);
+
+        return grInc.getValue("number");
+    },
+
+    /**
+     * Create a new attachment based on the Base64 encoded data and content type specified
+     * @param {GlideRecord} Target record to add attachment to
+     * @param {String} Filename
+     * @param {String} Content type (i.e. image/png, text/plain)
+     * @param {String} Base64 encoded file
+     * @returns {GlideSysAttachment} New attachment
+     */
+    createAttachmentFromBase64: function(target, fileName, contentType, base64Data) {
+        var stringUtil = new GlideStringUtil();
+        var attachment = new GlideSysAttachment();
+        var grAttach = attachment.write(target, fileName, contentType, stringUtil.base64DecodeAsBytes(base64Data));
+		
+        return grAttach;
+    },
+
+    /**
+     * Add a new journal entry to an incident (work note or comment)
+     * @param {String} Incident number
+     * @param {Boolean} Indicates if the comment is a work_note
+     * @param {String} Journal entry
+     * @returns {String} Status message
+     */	
+	addJournalEntry: function(incNum, isWorkNote, journalEntry) {
+		var grInc = new GlideRecord('incident');
+		grInc.get('number', incNum);
+		
+		if (grInc.isValidRecord()) {
+			if (isWorkNote) {
+				grInc.work_notes = journalEntry;
+			} else {
+				grInc.comments = journalEntry;
+			}
+			grInc.update();
+			
+			return gs.getMessage("Successfully added journal entry to incident {0}.", [ incNum ] );
+		} else {
+			return gs.getMessage("Unable to update incident {0}", [ incNum ] );
+		}
+			
+	},
+	
+    /**
+     * Return details for the given incident
+     * @param {String} Incident number (i.e. INC0010047)
+     * @param {Array} List of fields to return. Both value and display value is returned.
+     * @param {Boolean} Include work notes
+     * @param {Boolean} Include comments
+     * @returns {JSON} Object containing requested data
+     */
+    getIncidentDetails: function(incNum, fields, workNotes, additionalComments) {
+        try {
+            fields = fields || ["state", "priority", "short_description", "number"];
+            workNotes = workNotes || false;
+            additionalComments = additionalComments || false;
+
+            var allFields = fields;
+            fields.forEach(function(_fieldName) {
+                allFields.push([_fieldName, '$DISPLAY'].join(''));
+            });
+
+            var gqInc = new global.GlideQuery('incident')
+                .where('number', incNum)
+                .selectOne(allFields)
+                .map(function(_incident) {
+                    Object.keys(_incident).forEach(function(_key) {
+                        if (!_key.endsWith('$DISPLAY') && _key !== 'sys_id') {
+                            var displayField = [_key, '$DISPLAY'].join('');
+                            _incident[_key] = {
+                                "value": _incident[_key],
+                                "displayValue": _incident[displayField]
+                            };
+							delete _incident[displayField];
+                        }
+                    });
+
+                    return _incident;
+                }, this)
+                .get();
+
+            if (workNotes) {
+                gqInc.work_notes = this._getJournalEntries(gqInc.sys_id, 'work_notes');
+            }
+
+            if (additionalComments) {
+                gqInc.comments = this._getJournalEntries(gqInc.sys_id, 'comments');
+            }
+
+            return gqInc;
+        } catch (e) {
+            return {
+                "error": gs.getMessage("Error retrieving incident {0}", [incNum]),
+                "extended_error": e.toString(),
+                "code": e.getErrorNum()
+            };
+        }
+
+    },
+
+    /**
+     * Get journal entries (worknotes or comments) for given Include
+     * @param {String} Incident sys_id
+     * @param {String} comments (default) | work_notes
+     * @returns {Array} Object containing comment, date and created by
+     */
+    _getJournalEntries: function(incidentSysId, journalType) {
+        journalType = ["work_notes", "comments"].indexOf(journalType) > -1 ? journalType : "comments";
+        var gqEntry = new global.GlideQuery('sys_journal_field')
+            .where('element_id', incidentSysId)
+            .where('element', journalType)
+            .orderByDesc('sys_created_on')
+            .select('value', 'sys_created_on', 'sys_created_by')
+            .map(function(_journal) {
+                return {
+                    "comment": _journal['value'],
+                    "created_by": _journal['sys_created_by'],
+                    "created": _journal['sys_created_on']
+                };
+            })
+            .reduce(function(arr, e) {
+                arr.push(e);
+                return arr;
+            }, []);
+
+        return gqEntry;
+    },
+
+    /**
+     * Get get user sys_id for given username or email
+     * @param {String} Username or email address
+     * @returns {String} sys_id of user
+     */
+    _getUser: function(userName) {
+        try {
+            var gqUser = new global.GlideQuery('sys_user')
+                .where('email', userName)
+                .orWhere('user_name', userName)
+                .selectOne()
+                .get();
+			
+            return gqUser.sys_id;
+        } catch (e) {
+            return "";
+        }
+    },
+
+    type: 'MegaIncidentUtils'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-18 10:11:18</sys_created_on>
+        <sys_id>87bf41e0c37875107c4039af05013178</sys_id>
+        <sys_mod_count>65</sys_mod_count>
+        <sys_name>MegaIncidentUtils</sys_name>
+        <sys_package display_value="Incident API" source="6e474124c33875107c4039af05013186">6e474124c33875107c4039af05013186</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Incident API">6e474124c33875107c4039af05013186</sys_scope>
+        <sys_update_name>sys_script_include_87bf41e0c37875107c4039af05013178</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-22 14:53:31</sys_updated_on>
+    </sys_script_include>
+</record_update>
