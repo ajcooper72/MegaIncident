@@ -64,6 +64,25 @@ MegaIncidentUtils.prototype = {
 		
         return grAttach;
     },
+	
+	/**
+     * Get get user sys_id for given username or email
+     * @param {String} Username or email address
+     * @returns {String} sys_id of user
+     */
+    _getUser: function(userName) {
+        try {
+            var gqUser = new global.GlideQuery('sys_user')
+                .where('email', userName)
+                .orWhere('user_name', userName)
+                .selectOne()
+                .get();
+			
+            return gqUser.sys_id;
+        } catch (e) {
+            return "";
+        }
+    },
 
     /**
      * Add a new journal entry to an incident (work note or comment)
@@ -101,26 +120,34 @@ MegaIncidentUtils.prototype = {
      */
     getIncidentDetails: function(incNum, fields, workNotes, additionalComments) {
         try {
+			// if fields haven't been specified then set defaults
             fields = fields || ["state", "priority", "short_description", "number"];
+			
+			// only return work notes or comments if explicitly requested
             workNotes = workNotes || false;
             additionalComments = additionalComments || false;
 
+			// need to get display values as well so add the value to the fields array
             var allFields = fields;
             fields.forEach(function(_fieldName) {
-                allFields.push([_fieldName, '$DISPLAY'].join(''));
+                allFields.push(_fieldName.concat('$DISPLAY'));
             });
 
             var gqInc = new global.GlideQuery('incident')
                 .where('number', incNum)
                 .selectOne(allFields)
                 .map(function(_incident) {
+					// loop through all keys in the _incident JSON object
                     Object.keys(_incident).forEach(function(_key) {
+						// ignore display fields and sys_id
                         if (!_key.endsWith('$DISPLAY') && _key !== 'sys_id') {
-                            var displayField = [_key, '$DISPLAY'].join('');
+                            var displayField = _key.concat('$DISPLAY');
+							// replace the property with a new JSON object containing the value and display
                             _incident[_key] = {
                                 "value": _incident[_key],
                                 "displayValue": _incident[displayField]
                             };
+							// remove the display field from the array
 							delete _incident[displayField];
                         }
                     });
@@ -149,7 +176,7 @@ MegaIncidentUtils.prototype = {
     },
 
     /**
-     * Get journal entries (worknotes or comments) for given Include
+     * Get journal entries (worknotes or comments) for given incident
      * @param {String} Incident sys_id
      * @param {String} comments (default) | work_notes
      * @returns {Array} Object containing comment, date and created by
@@ -176,38 +203,19 @@ MegaIncidentUtils.prototype = {
         return gqEntry;
     },
 
-    /**
-     * Get get user sys_id for given username or email
-     * @param {String} Username or email address
-     * @returns {String} sys_id of user
-     */
-    _getUser: function(userName) {
-        try {
-            var gqUser = new global.GlideQuery('sys_user')
-                .where('email', userName)
-                .orWhere('user_name', userName)
-                .selectOne()
-                .get();
-			
-            return gqUser.sys_id;
-        } catch (e) {
-            return "";
-        }
-    },
-
     type: 'MegaIncidentUtils'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-08-18 10:11:18</sys_created_on>
         <sys_id>87bf41e0c37875107c4039af05013178</sys_id>
-        <sys_mod_count>65</sys_mod_count>
+        <sys_mod_count>66</sys_mod_count>
         <sys_name>MegaIncidentUtils</sys_name>
         <sys_package display_value="Incident API" source="6e474124c33875107c4039af05013186">6e474124c33875107c4039af05013186</sys_package>
         <sys_policy/>
         <sys_scope display_value="Incident API">6e474124c33875107c4039af05013186</sys_scope>
         <sys_update_name>sys_script_include_87bf41e0c37875107c4039af05013178</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-08-22 14:53:31</sys_updated_on>
+        <sys_updated_on>2023-08-23 14:01:44</sys_updated_on>
     </sys_script_include>
 </record_update>

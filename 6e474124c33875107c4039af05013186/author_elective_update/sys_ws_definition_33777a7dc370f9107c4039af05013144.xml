@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_definition">
+    <sys_ws_definition action="DELETE">
+        <active>true</active>
+        <base_uri>/api/232327/incidentapi</base_uri>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_version>v1</default_version>
+        <doc_link/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <is_versioned>true</is_versioned>
+        <name>IncidentAPI</name>
+        <namespace>232327</namespace>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <service_id>incidentapi</service_id>
+        <short_description/>
+        <sys_class_name>sys_ws_definition</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-22 14:56:00</sys_created_on>
+        <sys_id>33777a7dc370f9107c4039af05013144</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>IncidentAPI</sys_name>
+        <sys_package display_value="Incident API" source="6e474124c33875107c4039af05013186">6e474124c33875107c4039af05013186</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Incident API">6e474124c33875107c4039af05013186</sys_scope>
+        <sys_update_name>sys_ws_definition_33777a7dc370f9107c4039af05013144</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-22 14:57:34</sys_updated_on>
+    </sys_ws_definition>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Incident API">6e474124c33875107c4039af05013186</application>
+        <file_path/>
+        <instance_id>05e4f6b2db87cd10387021c4059619ab</instance_id>
+        <instance_name>dev126965</instance_name>
+        <name>sys_ws_definition_33777a7dc370f9107c4039af05013144</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_definition"><sys_ws_definition action="INSERT_OR_UPDATE"><active>true</active><base_uri>/api/232327/incidentapi</base_uri><consumes>application/json,application/xml,text/xml</consumes><consumes_customized>false</consumes_customized><default_version>v1</default_version><doc_link/><enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl><is_versioned>true</is_versioned><name>IncidentAPI</name><namespace>232327</namespace><produces>application/json,application/xml,text/xml</produces><produces_customized>false</produces_customized><service_id>incidentapi</service_id><short_description/><sys_class_name>sys_ws_definition</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-22 14:56:00</sys_created_on><sys_id>33777a7dc370f9107c4039af05013144</sys_id><sys_mod_count>1</sys_mod_count><sys_name>IncidentAPI</sys_name><sys_package display_value="Incident API" source="6e474124c33875107c4039af05013186">6e474124c33875107c4039af05013186</sys_package><sys_policy/><sys_scope display_value="Incident API">6e474124c33875107c4039af05013186</sys_scope><sys_update_name>sys_ws_definition_33777a7dc370f9107c4039af05013144</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-22 14:57:34</sys_updated_on></sys_ws_definition></record_update>]]></payload>
+        <payload_hash>1041099000</payload_hash>
+        <record_name>IncidentAPI</record_name>
+        <reverted_from/>
+        <source>4c677e7dc370f9107c4039af0501318b</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-22 14:57:34</sys_created_on>
+        <sys_id>b128f6bdc370f9107c4039af050131fc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18a1dc043ee0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-22 14:57:34</sys_updated_on>
+        <type>Scripted REST API</type>
+        <update_guid>f528f6bd2a70f91040342ba9e6ab00fb</update_guid>
+        <update_guid_history>f528f6bd2a70f91040342ba9e6ab00fb:1041099000,0fc7fa7da570f9105c301570c904c177:-1059723954</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-23 15:53:14</sys_created_on>
+        <sys_db_object display_value="" name="sys_ws_definition">sys_ws_definition</sys_db_object>
+        <sys_id>1b64bdfabd9f4ae8bf3146257a683a40</sys_id>
+        <sys_metadata>33777a7dc370f9107c4039af05013144</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>IncidentAPI</sys_name>
+        <sys_package display_value="Incident API" source="6e474124c33875107c4039af05013186">6e474124c33875107c4039af05013186</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Incident API">6e474124c33875107c4039af05013186</sys_scope>
+        <sys_scope_delete display_value="">9a38480463c94ce0a14cd29fd62b5100</sys_scope_delete>
+        <sys_update_name>sys_ws_definition_33777a7dc370f9107c4039af05013144</sys_update_name>
+        <sys_update_version display_value="sys_ws_definition_33777a7dc370f9107c4039af05013144">b128f6bdc370f9107c4039af050131fc</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-23 15:53:14</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
