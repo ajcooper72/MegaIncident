@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="oauth_entity">
+    <oauth_entity action="DELETE">
+        <access>public</access>
+        <access_token_lifespan>1800</access_token_lifespan>
+        <active>true</active>
+        <auth_code_lifespan>60</auth_code_lifespan>
+        <auth_url/>
+        <certificate_url/>
+        <client_id>bab47b9e1cb47d100e128c5523f70d25</client_id>
+        <client_secret>﷞﷟﷒85dbd8848776211016e3fe68dabb3507﷬﷔1﷬﷭an8XF51hvQ26maWFYxPgFA==vxbO-AEp4YrG_DnUOP2W_dKxawgAbIqjClI=﷮﷯</client_secret>
+        <client_uuid>7ab47b9ec3b47d107c4039af05013125</client_uuid>
+        <code_challenge_method>S256</code_challenge_method>
+        <comments/>
+        <default_grant_type>password</default_grant_type>
+        <id_token_lifespan>86400</id_token_lifespan>
+        <logo_url/>
+        <message_signature_lifespan>60</message_signature_lifespan>
+        <mobile_client>false</mobile_client>
+        <name>Test</name>
+        <oauth_api_script/>
+        <protocol_name/>
+        <public_client>false</public_client>
+        <redirect_url/>
+        <refresh_token_lifespan>8640000</refresh_token_lifespan>
+        <refresh_token_url/>
+        <restricted_binding>false</restricted_binding>
+        <revoke_token_url/>
+        <salt/>
+        <send_client_credentials_as>request_body_parameter</send_client_credentials_as>
+        <skip_authorize>false</skip_authorize>
+        <sys_class_name>oauth_entity</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-24 08:39:21</sys_created_on>
+        <sys_id>fab47b9ec3b47d107c4039af05013125</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Test</sys_name>
+        <sys_package display_value="Incident API" source="6e474124c33875107c4039af05013186">6e474124c33875107c4039af05013186</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Incident API">6e474124c33875107c4039af05013186</sys_scope>
+        <sys_update_name>oauth_entity_fab47b9ec3b47d107c4039af05013125</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-24 08:39:21</sys_updated_on>
+        <token_url/>
+        <type>client</type>
+        <use_mutual_auth>false</use_mutual_auth>
+        <user/>
+    </oauth_entity>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Incident API">6e474124c33875107c4039af05013186</application>
+        <file_path/>
+        <instance_id>05e4f6b2db87cd10387021c4059619ab</instance_id>
+        <instance_name>dev126965</instance_name>
+        <name>oauth_entity_fab47b9ec3b47d107c4039af05013125</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="oauth_entity"><oauth_entity action="INSERT_OR_UPDATE"><access>public</access><access_token_lifespan>1800</access_token_lifespan><active>true</active><auth_code_lifespan>60</auth_code_lifespan><auth_url/><certificate_url/><client_id>bab47b9e1cb47d100e128c5523f70d25</client_id><client_secret>﷞﷟﷒85dbd8848776211016e3fe68dabb3507﷬﷔1﷬﷭an8XF51hvQ26maWFYxPgFA==vxbO-AEp4YrG_DnUOP2W_dKxawgAbIqjClI=﷮﷯</client_secret><client_uuid>7ab47b9ec3b47d107c4039af05013125</client_uuid><code_challenge_method>S256</code_challenge_method><comments/><default_grant_type>password</default_grant_type><id_token_lifespan>86400</id_token_lifespan><logo_url/><message_signature_lifespan>60</message_signature_lifespan><mobile_client>false</mobile_client><name>Test</name><oauth_api_script/><protocol_name/><public_client>false</public_client><redirect_url/><refresh_token_lifespan>8640000</refresh_token_lifespan><refresh_token_url/><restricted_binding>false</restricted_binding><revoke_token_url/><salt/><send_client_credentials_as>request_body_parameter</send_client_credentials_as><skip_authorize>false</skip_authorize><sys_class_name>oauth_entity</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-24 08:39:21</sys_created_on><sys_id>fab47b9ec3b47d107c4039af05013125</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Test</sys_name><sys_package display_value="Incident API" source="6e474124c33875107c4039af05013186">6e474124c33875107c4039af05013186</sys_package><sys_policy/><sys_scope display_value="Incident API">6e474124c33875107c4039af05013186</sys_scope><sys_update_name>oauth_entity_fab47b9ec3b47d107c4039af05013125</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-24 08:39:21</sys_updated_on><token_url/><type>client</type><use_mutual_auth>false</use_mutual_auth><user/></oauth_entity></record_update>]]></payload>
+        <payload_hash>339698754</payload_hash>
+        <record_name>Test</record_name>
+        <reverted_from/>
+        <source>4c677e7dc370f9107c4039af0501318b</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-24 08:39:21</sys_created_on>
+        <sys_id>c5c43b9ec3b47d107c4039af050131ee</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18a26b2b8be0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-24 08:39:21</sys_updated_on>
+        <type>Application Registries</type>
+        <update_guid>c9c43b9e89b47d100f1560021d14b5ed</update_guid>
+        <update_guid_history>c9c43b9e89b47d100f1560021d14b5ed:339698754</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Test">875c782ac3f87d107c4039af05013188</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-24 13:52:08</sys_created_on>
+        <sys_db_object display_value="" name="oauth_entity">oauth_entity</sys_db_object>
+        <sys_id>485dee02495e4b7883cf9c8cab449281</sys_id>
+        <sys_metadata>fab47b9ec3b47d107c4039af05013125</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Test</sys_name>
+        <sys_package display_value="Incident API" source="6e474124c33875107c4039af05013186">6e474124c33875107c4039af05013186</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Incident API">6e474124c33875107c4039af05013186</sys_scope>
+        <sys_scope_delete display_value="">9a38480463c94ce0a14cd29fd62b5100</sys_scope_delete>
+        <sys_update_name>oauth_entity_fab47b9ec3b47d107c4039af05013125</sys_update_name>
+        <sys_update_version display_value="oauth_entity_fab47b9ec3b47d107c4039af05013125">c5c43b9ec3b47d107c4039af050131ee</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-24 13:52:08</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

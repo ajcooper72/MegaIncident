@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_rate_limit_rules">
+    <sys_rate_limit_rules action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <api>MegaIncident</api>
+        <api_resource>GET /232327/megaincident/get/{incident_number}</api_resource>
+        <import_set_table/>
+        <name>Get Incident Status Limit</name>
+        <requests>5</requests>
+        <rest_api_resource>GET /232327/megaincident/get/{incident_number}</rest_api_resource>
+        <role/>
+        <sys_class_name>sys_rate_limit_rules</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-25 09:21:52</sys_created_on>
+        <sys_id>4357c1bec3f8bd107c4039af05013172</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Get Incident Status Limit</sys_name>
+        <sys_package display_value="Incident API" source="6e474124c33875107c4039af05013186">6e474124c33875107c4039af05013186</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Incident API">6e474124c33875107c4039af05013186</sys_scope>
+        <sys_update_name>sys_rate_limit_rules_4357c1bec3f8bd107c4039af05013172</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-25 09:21:52</sys_updated_on>
+        <table/>
+        <type>All</type>
+        <user/>
+        <version>latest</version>
+    </sys_rate_limit_rules>
+</record_update>
